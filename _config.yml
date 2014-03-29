@@ -27,6 +27,8 @@ author :
 #
 production_url : http://chrischizinski.github.com
 
+# The number of posts per page
+paginate: 3
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
 JB :
@@ -72,8 +74,7 @@ JB :
   archive_path: /archive.html
   categories_path : /categories.html
   tags_path : /tags.html
-  atom_path : /atom.xml
-  rss_path : /rss.xml
+
 
   # Settings for comments helper
   # Set 'provider' to the comment provider you want to use.
