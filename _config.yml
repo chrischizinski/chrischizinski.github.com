@@ -8,12 +8,12 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Jekyll Bootstrap
-tagline: Site Tagline
+title : Christopher Chizinski
+tagline: Blog 
 author :
-  name : Name Lastname
-  email : blah@email.test
-  github : username
+  name : Christopher Chizinski
+  email : chris.chizinski@gmail.com
+  github : chrischizinski
   twitter : username
   feedburner : feedname
 
@@ -82,7 +82,7 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : jekyllbootstrap
+      short_name : chrischizinski.github.com
     livefyre :
       site_id : 123
     intensedebate :
@@ -100,7 +100,7 @@ JB :
   analytics :
     provider : google 
     google : 
-        tracking_id : 'UA-123-12'
+        tracking_id : 'UA-48496439-2'
     getclicky :
       site_id : 
     mixpanel :
