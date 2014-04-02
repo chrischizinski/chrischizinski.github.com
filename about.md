@@ -11,10 +11,6 @@ tagline:
 I am a fishery ecologist working in the the [Nebraska Cooperative Fish and Wildlife Research Unit](http://snr.unl.edu/necoopunit) at the [University of Nebraska](http://snr.unl.edu). 
 I am the program coordinator for the Nebraska Angler Survey Project where we conduct research on the dynamic relationship between anglers and sportfishes.
 
-I have wanted to start a "blog" where I share some of the things I have learned in R for quite a long time now.  I finally decided to bite the bullet and start putting one together.
-To do this, I wanted to find an environment that was relatively simple and clean that allowed me to directly incorporate R code using RMarkdown and settled on [Jekyll](http://jekyllbootstrap.com/) 
-in [GitHub Pages](https://pages.github.com/).   To get the site up and running I relied heavily on **Jason Fishers** [tutorial](http://jfisher-usgs.github.io/lessons/2012/05/30/jekyll-build-on-windows/)
-
 ### Research interests
 I have broad interests in all aspects of ecology but my research tends to focus in freshwater systems.  I approach my research using field, laboratory, and modelling/simulation techniques.  
 
