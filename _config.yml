@@ -30,7 +30,7 @@ production_url : http://chrischizinski.github.com
 markdown: kramdown
 
 # The number of posts per page
-paginate: 1
+paginate: 2
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
 JB :
@@ -85,7 +85,7 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : chrischizinski.github.com
+      short_name : chrischizinskigithubcom
     livefyre :
       site_id : 123
     intensedebate :
