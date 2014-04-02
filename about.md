@@ -37,4 +37,4 @@ Research areas that I currently focus on are
 
  For a full list, [click here](publist.html)
  
-![center](/figs/me.jpg)
+![center](/figs/me.JPG)
