@@ -16,7 +16,7 @@ I have broad interests in all aspects of ecology but my research tends to focus 
 
 Research areas that I currently focus on are
 
- * Spatial/temporal dynamics of angling pressure 
+ * Spatiotemporal dynamics of angling pressure 
  * Improving creel methodology and quantification
  * Behavioural effects of recreational angling
  * Invasive species ecology and management
