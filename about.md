@@ -3,10 +3,11 @@ layout: page
 title: About
 header: About
 group: navigation
+image: //figs/me.JPG
 tagline: 
 ---
 {% include JB/setup %}
 
 I am a fishery ecologist working in the [Nebraska Cooperative Fish and Wildlife Research Unit] (http://snr.unl.edu/necoopunit/) at the [University of Nebraska-Lincoln] (http://snr.unl.edu/).  
 
-![center](chrischizinski.github.com/figs/me.JPG)
+![center](/figs/me.JPG)
