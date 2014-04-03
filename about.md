@@ -9,12 +9,13 @@ tagline:
 {% include JB/setup %}
 
 I am a fishery ecologist working in the the [Nebraska Cooperative Fish and Wildlife Research Unit](http://snr.unl.edu/necoopunit) at the [University of Nebraska](http://snr.unl.edu). 
-I am the program coordinator for the Nebraska Angler Survey Project where we conduct research on the dynamic relationship between anglers and sportfishes.
+I am the program coordinator for the Nebraska Angler Survey Project where we conduct research on the dynamic relationship between anglers and sportfishes. For more information please visit
+our [research collaboration](http://fishhunt.unl.edu)
 
 ### Research interests
 I have broad interests in all aspects of ecology but my research tends to focus in freshwater systems.  I approach my research using field, laboratory, and modelling/simulation techniques.  
 
-Research areas that I currently focus on are
+Research areas that I am currently focused
 
  * Spatiotemporal dynamics of angling pressure 
  * Improving creel methodology and quantification
