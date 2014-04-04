@@ -16,7 +16,7 @@ it is possible to get the figures the way you want them using the plot function 
 plus I have themes created for *ggplot*.  So I explored a way to create the *igraph* plots in *ggplot*.  
 
 
-### *igraph plots*
+## *igraph plots*
 First, I will bring in the data, which is a matrix of species relative abundances.  Columns are the species and each row is an observation. Here is a snapshot of what the data looks like
 
 
@@ -64,7 +64,7 @@ par(op)
 ![center](/figs/2014-04-04-igraph-ggplotll/chunck2.png) 
 
 
-### Create graphs in *ggplot*
+## Create graphs in *ggplot*
 Okay first lets extract the data to produce the basic graph of the network on the left.  *ggplot* needs the data as a data.frame 
 so  extract the data and coerce it to a data.frame  
 
@@ -93,7 +93,7 @@ fr.all.df  ## display the x (V1) and y (V2) coordinates for each of the nodes.
 {% endhighlight %}
 
 
-Now we have all the coordinates for the nodes in the plot, which we can display in *ggplot*
+Now we have all the coordinates for the nodes in the plot,  we can display it in *ggplot*
 
 
 
@@ -196,7 +196,7 @@ g
 ## 46  WAE WHB    120 -1.3122 -4.3867 -2.0786 -1.7555
 {% endhighlight %}
 
-and then lets plot it out. 
+and plot it out. 
 
 
 
