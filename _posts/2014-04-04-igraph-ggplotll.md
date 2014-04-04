@@ -16,7 +16,7 @@ it is possible to get the figures the way you want them using the plot function 
 plus I have themes created for *ggplot*.  So I explored a way to create the *igraph* plots in *ggplot*.  
 
 
-## *igraph plots
+### *igraph plots*
 First, I will bring in the data, which is a matrix of species relative abundances.  Columns are the species and each row is an observation. Here is a snapshot of what the data looks like
 
 
