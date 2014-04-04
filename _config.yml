@@ -30,7 +30,7 @@ production_url : http://chrischizinski.github.com
 markdown: kramdown
 
 # The number of posts per page
-paginate: 2
+paginate: 1
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
 JB :

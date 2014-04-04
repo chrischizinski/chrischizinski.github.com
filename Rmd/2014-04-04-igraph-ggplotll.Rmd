@@ -1,0 +1,154 @@
+Plotting igraph objects with ggplot2
+========================================================
+
+I have been working collaborating on a project with [Dustin Martin](https://sites.google.com/site/martinfisheries/) using network theory.  We have are utlizing the igraph package in R, which produces graphs.  Including these graphs in presentations and publications has been difficult because they have been difficult to customize.   I am sure it is possible to get the figures the way you want them but I feel much more comfortable working with ggplot, plus I have themes created for ggplot that I would like to use with these figures.  Here is the process I used to come up with to replicate the plots in ggplot.  
+
+
+```{r, echo=FALSE}
+options(warn = 1,stringsAsFactors = FALSE)
+.libPaths("D:/RPackages")
+library(knitr)
+load("W:/CreelProject/Manuscripts/1_Active Manuscripts/Co-Occurence/Cooccurrence R Files Networks/caught_wide.RData")
+```
+
+
+First, I will bring in the data, which is a matrix of species relative abundances.  Columns are the species and each row is an observation. Here is a snapshot of what the data looks like
+
+```{r}
+head(caught.wide.2)
+```
+
+Load the igraph library and run through the first few steps
+
+```{r}
+library(igraph)
+caught.inc<-graph.incidence(caught.wide.2,weighted=TRUE) #make data into a bipartite graph object
+obs.parties.all<-bipartite.projection(caught.inc)[[1]]
+obs.spp.all<-bipartite.projection(caught.inc)[[2]]
+```
+
+Plotting these two plots produces decent graphs but not great.  
+```{r chunck2, fig.show='hold'} 
+op <- par(mfrow=c(1,2)) 
+fr.all<-layout.fruchterman.reingold(obs.spp.all)
+plot(obs.spp.all,layout=fr.all,edge.color="black",edge.width=E(obs.spp.all)$weight*0.1,vertex.label=V(obs.spp.all)$name)
+obs.sg.all<-fastgreedy.community(obs.spp.all,weights=E(obs.spp.all)$weight)
+plot(obs.sg.all, obs.spp.all, layout=fr.all, edge.width=E(obs.spp.all)$weight*0.25, vertex.label=V(obs.spp.all)$name,vertex.label.color="blue") 
+par(op) 
+``` 
+
+Okay first lets extract the data to produce the basic graph of the network on the left.  ggplot needs the data as a data.frame so lets extract the data and get it set in a manner that ggplot knows what to do.  
+```{r}
+fr.all.df<-as.data.frame(fr.all)  ## convert the layout to a data.frame
+fr.all.df$species<-colnames(caught.wide.2)  ## add in the species codes
+
+fr.all.df  ## disply the x (V1) and y (V2) coordinates for each of the nodes.
+```
+
+Now we have all the coordinates for the nodes in the plot, which we can display in ggplot
+
+
+```{r fig.width=7, fig.height=6}
+library(ggplot2)
+
+ggplot() +
+    geom_point(data=fr.all.df,aes(x=V1,y=V2),size=21,colour="black") +  # adds a black border around the nodes
+    geom_point(data=fr.all.df,aes(x=V1,y=V2),size=20,colour="lightgrey") +
+    geom_text(data=fr.all.df,aes(x=V1,y=V2,label=species)) + # add the node labels
+    scale_x_continuous(expand=c(0,1))+  # expand the x limits 
+    scale_y_continuous(expand=c(0,1))+ # expand the y limits
+    theme_bw()  # use the ggplot black and white theme
+```
+
+Now that we have the nodes in the right place, lets draw the connections between the nodes
+```{r}
+g<- get.data.frame(obs.spp.all) # get the edge information using the get.data.frame function
+
+head(g)
+
+g$from.x<-fr.all.df$V1[match(g$from,fr.all.df$species)]  #  match the from locations from the node data.frame we previously connected
+g$from.y<-fr.all.df$V2[match(g$from,fr.all.df$species)]
+g$to.x<-fr.all.df$V1[match(g$to,fr.all.df$species)] #  match the to locations from the node data.frame we previously connected
+g$to.y<-fr.all.df$V2[match(g$to,fr.all.df$species)]
+
+g
+```
+and then lets plot it out. 
+
+
+```{r fig.width=7, fig.height=6}
+
+ggplot() +
+    geom_segment(data=g,aes(x=from.x,xend = to.x, y=from.y,yend = to.y,size=weight),colour="black") +
+    geom_point(data=fr.all.df,aes(x=V1,y=V2),size=21,colour="black") +  # adds a black border around the nodes
+    geom_point(data=fr.all.df,aes(x=V1,y=V2),size=20,colour="lightgrey") +
+    geom_text(data=fr.all.df,aes(x=V1,y=V2,label=species)) + # add the node labels
+    scale_x_continuous(expand=c(0,1))+  # expand the x limits 
+    scale_y_continuous(expand=c(0,1))+ # expand the y limits
+    theme_bw()  # use the ggplot black and white theme
+```
+
+Lets mess with the themes and remove the grid lines and axis labels etc.  
+
+
+```{r fig.width=7, fig.height=6}
+
+ggplot() +
+    geom_segment(data=g,aes(x=from.x,xend = to.x, y=from.y,yend = to.y,size=weight),colour="black") +
+    geom_point(data=fr.all.df,aes(x=V1,y=V2),size=21,colour="black") +  # adds a black border around the nodes
+    geom_point(data=fr.all.df,aes(x=V1,y=V2),size=20,colour="lightgrey") +
+    geom_text(data=fr.all.df,aes(x=V1,y=V2,label=species)) + # add the node labels
+    scale_x_continuous(expand=c(0,1))+  # expand the x limits 
+    scale_y_continuous(expand=c(0,1))+ # expand the y limits
+    theme_bw()+  # use the ggplot black and white theme
+    theme(
+      axis.text.x = element_blank(),  # remove x-axis text
+      axis.text.y = element_blank(), # remove y-axis text
+      axis.ticks = element_blank(),  # remove axis ticks
+      axis.title.x = element_blank(), # remove x-axis labels
+      axis.title.y = element_blank(), # remove y-axis labels
+      panel.background = element_blank(), 
+      panel.border =element_blank(), 
+      panel.grid.major = element_blank(),  #remove major-grid labels
+      panel.grid.minor = element_blank(),  #remove minor-grid labels
+      plot.background = element_blank())
+```
+
+
+If we wanted to incorporate some of the elements of the community detection algorithms present in the igraph on the right.  We can make elements in the one group red and the other blue.  Connections within a group will be a solid line and between groups a dashed line.  
+
+```{r}
+grouping<-data.frame(species=obs.sg.all$names,group=obs.sg.all$membership)  #create a data.frame of species and group membership
+g$grp.from<-grouping$group[match(g$from,grouping$species)] # match group membership within the g data.frame for from and to nodes
+g$grp.to<-grouping$group[match(g$to,grouping$species)]
+g$grp.type<-ifelse(g$grp.from==g$grp.to,1,0) # if from and to nodes are the in same group then type is 1 else 0
+g  # display the additions
+
+fr.all.df$grp<-grouping$group[match(fr.all.df$species,grouping$species)]  # add group type to node data.frame
+```
+
+```{r fig.width=7, fig.height=6}
+
+ggplot() +
+    geom_segment(data=g,aes(x=from.x,xend = to.x, y=from.y,yend = to.y,size=weight,linetype=as.factor(grp.type)),colour="black") + # add line type
+    geom_point(data=fr.all.df,aes(x=V1,y=V2),size=21,colour="black") +  # adds a black border around the nodes
+    geom_point(data=fr.all.df,aes(x=V1,y=V2,colour=as.factor(grp)),size=20,show_guide=FALSE) +
+    geom_text(data=fr.all.df,aes(x=V1,y=V2,label=species)) + # add the node labels
+    scale_colour_manual(values=c("1"="red","2"="lightblue"))+  # add colour scaling for group membership
+    scale_linetype_manual(values=c("0"="dashed","1"="solid"))+ # add linteyp scaling for within and between groups
+    scale_x_continuous(expand=c(0,1))+  # expand the x limits 
+    scale_y_continuous(expand=c(0,1))+ # expand the y limits
+    theme_bw()+  # use the ggplot black and white theme
+    theme(
+      axis.text.x = element_blank(),  # remove x-axis text
+      axis.text.y = element_blank(), # remove y-axis text
+      axis.ticks = element_blank(),  # remove axis ticks
+      axis.title.x = element_blank(), # remove x-axis labels
+      axis.title.y = element_blank(), # remove y-axis labels
+      panel.background = element_blank(), 
+      panel.border =element_blank(), 
+      panel.grid.major = element_blank(),  #remove major-grid labels
+      panel.grid.minor = element_blank(),  #remove minor-grid labels
+      plot.background = element_blank())
+```
+
