@@ -9,9 +9,10 @@ tags: [R,ggplot2,igraph]
 
 ========================================================
 
-I have been working collaborating on a project with [Dustin Martin](https://sites.google.com/site/martinfisheries/) using network theory.  We have are utlizing the igraph package in R, which produces graphs.  Including these graphs in presentations and publications has been difficult because they have been difficult to customize.   I am sure it is possible to get the figures the way you want them but I feel much more comfortable working with ggplot, plus I have themes created for ggplot that I would like to use with these figures.  Here is the process I used to come up with to replicate the plots in ggplot.  
-
-
+I have been working collaborating on a project with [Dustin Martin](https://sites.google.com/site/martinfisheries/) using network theory.  
+We have are utilizing the igraph package in R, which produces graphs of networks.  
+Including these graphs in presentations and publications has been difficult because they are difficult to customize (at least with my understanding of them).   
+I am sure it is possible to get the figures the way you want them but I feel much more comfortable working with ggplot, plus I have themes created for ggplot that I would like to use with these figures.  Here is the process I used to come up with to replicate the igraph plots in ggplot.  
 
 First, I will bring in the data, which is a matrix of species relative abundances.  Columns are the species and each row is an observation. Here is a snapshot of what the data looks like
 
