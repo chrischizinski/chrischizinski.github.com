@@ -10,10 +10,13 @@ tags: [R,ggplot2,igraph]
 ========================================================
 
 I have been working collaborating on a project with [Dustin Martin](https://sites.google.com/site/martinfisheries/) using network theory.  
-We have are utilizing the igraph package in R, which produces graphs of networks.  
-Including these graphs in presentations and publications has been difficult because they are difficult to customize (at least with my understanding of them).   
-I am sure it is possible to get the figures the way you want them but I feel much more comfortable working with ggplot, plus I have themes created for ggplot that I would like to use with these figures.  Here is the process I used to come up with to replicate the igraph plots in ggplot.  
+We have are utilizing the *igraph* package in R, which ultimately produces graphs of networks.  
+Including these graphs in presentations and publications has been difficult because they are difficult to customize (at least with my understanding of them). I am sure 
+it is possible to get the figures the way you want them using the plot function in *igraph* but I feel much more comfortable working with *ggplot*, 
+plus I have themes created for *ggplot*.  So I explored a way to create the *igraph* plots in *ggplot*.  
 
+
+## *igraph plots
 First, I will bring in the data, which is a matrix of species relative abundances.  Columns are the species and each row is an observation. Here is a snapshot of what the data looks like
 
 
@@ -34,7 +37,7 @@ head(caught.wide.2)
 {% endhighlight %}
 
 
-Load the igraph library and run through the first few steps
+Load the *igraph* library and run through the first few steps of generating the network
 
 
 {% highlight r %}
@@ -45,7 +48,7 @@ obs.spp.all <- bipartite.projection(caught.inc)[[2]]
 {% endhighlight %}
 
 
-Plotting these two plots produces decent graphs but not great.  
+Plotting these two plots produces okay graphs, but as I mentioned earlier, they are not great.  
 
 {% highlight r %}
 op <- par(mfrow = c(1, 2))
@@ -61,13 +64,15 @@ par(op)
 ![center](/figs/2014-04-04-igraph-ggplotll/chunck2.png) 
 
 
-Okay first lets extract the data to produce the basic graph of the network on the left.  ggplot needs the data as a data.frame so lets extract the data and get it set in a manner that ggplot knows what to do.  
+### Create graphs in *ggplot*
+Okay first lets extract the data to produce the basic graph of the network on the left.  *ggplot* needs the data as a data.frame 
+so  extract the data and coerce it to a data.frame  
 
 {% highlight r %}
 fr.all.df <- as.data.frame(fr.all)  ## convert the layout to a data.frame
 fr.all.df$species <- colnames(caught.wide.2)  ## add in the species codes
 
-fr.all.df  ## disply the x (V1) and y (V2) coordinates for each of the nodes.
+fr.all.df  ## display the x (V1) and y (V2) coordinates for each of the nodes.
 {% endhighlight %}
 
 
@@ -88,7 +93,7 @@ fr.all.df  ## disply the x (V1) and y (V2) coordinates for each of the nodes.
 {% endhighlight %}
 
 
-Now we have all the coordinates for the nodes in the plot, which we can display in ggplot
+Now we have all the coordinates for the nodes in the plot, which we can display in *ggplot*
 
 
 
