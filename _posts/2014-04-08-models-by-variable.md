@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Running multiple models by a variable in R"
+title: "Running a model by a factor in R"
 description: ""
 category: R
 tags: [R]
