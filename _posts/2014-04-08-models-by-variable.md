@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Running a model by a factor in R"
+title: "Models by a factor"
 description: ""
 category: R
 tags: [R]
