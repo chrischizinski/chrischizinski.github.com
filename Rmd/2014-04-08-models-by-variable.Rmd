@@ -1,0 +1,90 @@
+Running multiple models by a variable in R
+========================================================
+
+Recently, a friend asked a question on ways to run a single model by a grouping variable in a dataset (similar to the BY statement in SAS for those familiar with SAS).  This was a list of the multiple different ways
+that were suggested.  
+
+
+I will use the [baseball dataset](http://www.inside-r.org/packages/cran/plyr/docs/baseball) in the *plyr* package to go through the different approaches.  
+
+
+### Load and display the data
+```{r}
+library(plyr)  #load the plyr package
+data(baseball) #load the baseball dataset that comes with plyr
+head(baseball) # display the first six lines of the data.frame
+```
+
+To look at the year-team combinations in the data, use the ddply function
+```{r}
+baseball$team<-as.character(baseball$team)  #convert team from a factor to a character
+
+#For the purpose of this excercise we will reduce the dataset to just a few teams
+baseball.red<-baseball[baseball$team%in%c('BOS','CHN','CIN'),]
+
+#Use ddply again to create a variable called c_year, which is the number of years since the first year
+baseball.red<-ddply(baseball.red,.(id),transform,c_year=year-min(year))
+
+```
+So the basic idea for the process I am going to use, is that I am going to use a Poisson regression using the *glm* function in R to look at the hits as a function of year since the first year of data was included in the dataset.  Is the model 100% valid?  No but for this the actual model is not important.  
+
+Further, the approaches I am describing below, are runnign the same model with same dependent and independent variables across different subsets of data.  If you were interested in running different subsets of independent variables there are also many different approaches that could be considered, but I will not go into that at this time.  
+
+### 1. Subsetting and running each model seperate
+The basic process is to run each model seperately by providing a different subset of the data.  Not very difficult to do, but if you had a bunch of models to run, it can very quickly add up.  The nice thing about this process though is that you have very clear model outputs (i.e., a specific output for BOS, CHN, and CIN).  
+```{r}
+mod.BOS<-glm(h ~ c_year, data=baseball.red[baseball.red$team=="BOS",],family="poisson")  # run the model using only team BOS
+summary(mod.BOS) #  Display the model summary
+
+mod.CHN<-glm(h ~ c_year, data=baseball.red[baseball.red$team=="CHN",],family="poisson")
+summary(mod.CHN)
+
+mod.CIN<-glm(h ~ c_year, data=baseball.red[baseball.red$team=="CIN",],family="poisson")
+summary(mod.CIN)
+
+```
+
+### 2. Subsetting and running through a loop
+This process first identifies all the uniqe teams listed in the dataset and then will loop through those teams and store the output in a list.  The summary   for all the models can be provided by running lapply on that list or running summary on an extracted element of the list.  Problem with this method is just the inherent complication of using lists in R and running loops can take quite a long time especially on large datasets.  If it is speed you are after there are quicker options.  
+```{r}
+uniq.teams<-unique(baseball.red$team)  # find all the unique teams in the dataset
+model.out<-list()  # create a list to store each model
+
+for(i in 1:length(uniq.teams)){ 
+  model.out[[paste(uniq.teams[i])]]<-glm(h ~ c_year, data=baseball.red[baseball.red$team==paste(uniq.teams[i]),],family="poisson")
+  }
+
+lapply(model.out,summary)  # look at all the model outputs, this could be used with outputs on 3 and 5 as well.  
+summary(model.out[["CIN"]])  # or look at a specific model
+
+
+```
+
+### 3. Using *split* and *lapply*
+This process splits the dataset into seperate lists by a variable and then uses *lapply* to run the glm model across those different datasets.  
+```{r}
+datasets<-split(baseball.red,baseball.red$team)  # splits the dataset into a list by team
+str(datasets)  # look at the structure of the dataset
+model.out<-lapply(datasets,function(x) glm(h ~ c_year,family="poisson",data=x)) # apply the glm function across the dataset list
+
+#lapply(model.out,summary), # Not run because output is the same as above
+```
+
+### 4. Using *by*
+This process is similar to the one directly above but will do it in a single line of code.  Essentially what *by* does is the "data frame is split by row into data frames subsetted by the values of one or more factors, and function FUN is applied to each subset in turn"
+
+```{r}
+model.out<-by(data=baseball.red,baseball.red$team,function(x) glm(h ~ c_year,family="poisson",data=x))
+model.out
+```
+
+### 5. Using *dlply* 
+One package I use in alot of my analyses is the  [plyr package](http://cran.r-project.org/web/packages/plyr/index.html) created by [Hadley Wickham](http://had.co.nz/) (author of **ggplot2**, another package I use daily).  This packages make subsetting and applying functions incredibly easy and are relatively fast.  
+
+```{r}
+library(plyr)
+model.out <- dlply(baseball.red, .(team) , glm , formula = h ~ c_year , family = poisson ) #dlply takes the data as a dataframe and returns the output as a list
+llply(model.out,summary) #uses llply (list input - list output) to display the summary (instead of lapply, but lapply works as well)
+```
+
+As in a lot of things in R, there are many different approaches to the same problem. I personally tend to shy away from the use of the *lapply*, *mapply*, and *tapply* approaches but use the **plyr** package in most analysis.  
