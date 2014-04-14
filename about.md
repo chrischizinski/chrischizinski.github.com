@@ -9,7 +9,7 @@ tagline:
 {% include JB/setup %}
 
 I am a fishery ecologist working in the the [Nebraska Cooperative Fish and Wildlife Research Unit](http://snr.unl.edu/necoopunit) at the [University of Nebraska](http://snr.unl.edu). 
-I am the program coordinator for the Nebraska Angler Survey Project where we conduct research on the dynamic relationship between anglers and sportfishes. For more information please visit
+I am the program coordinator for the Nebraska Angler Survey Project where we conduct research on the dynamic relationship between anglers and sportfishes. For more information, please visit
 our research collaboration(*link coming soon*).
 
 ### Research interests
