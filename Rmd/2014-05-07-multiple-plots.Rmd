@@ -1,0 +1,132 @@
+Multiple plots in ggplot2
+========================================================
+
+The RMarkdown source to this file can be found [here](\Rmd\22014-05-07-multiple-plots.Rmd)
+
+As I have mentioned previously is that I use ggplots a ton in my work.  It is my goto for plotting in R and I have really loved the ease of plotting with this package.  One thing that can see kind of tricky is plotting multiple panels in a single figure.   There are a couple of different ways to do this using **ggplot2** and the **gridExtra** packages.  
+
+### ggplot2 and facet_wrap
+Within **ggplot2** there is [`facet_wrap`](http://docs.ggplot2.org/0.9.3.1/facet_wrap.html) which will allow you to create multiple panels by a variable with a single line of code. 
+
+As an example:
+
+
+```{r, results='hide', echo=FALSE, message=FALSE, warning=FALSE}
+.libPaths("D:/RPackages")
+```
+
+```{r}
+library(ggplot2)
+
+ ggplot(diamonds, ) +
+  geom_point(aes(x=carat, y = price)) +
+  facet_wrap(~ color,ncol=4) + 
+  theme(aspect.ratio = 1) 
+```
+
+The `facet_wrap`  command allows you to wrap panels by a single variable using the `~x` command, where `x` is your by variable.  You can specify the number of columns via `ncol`.  One thing thing to notice that the x and y axis are equal among the facets.  You can allow these to be vary among the different facets using `scales` command.  You can set it to `scales = 'free_x` to allow the x-axis to be variable but constant y, `scales = 'free_y` to allow the y-axis to be variable but constant x, and `scales = 'free` for both to vary.  
+
+Now this works pretty well when you have a dataset up already like this, but what if you have data from two different datasets?
+
+Lets load some data used to generate plot of angling effort and the surface area of a reservoir.
+
+```{r, results='hide', echo=FALSE, message=FALSE, warning=FALSE}
+load("C:/Users/cchizinski2/chrischizinski.github.com/datasets/press_elev.RData")
+```
+
+```{r}
+#load(url("https://github.com/chrischizinski/chrischizinski.github.com/raw/master/datasets/press_elev.RData"))
+#  You can not load this through knitr, which is why this is commented out
+head(elev)
+
+head(monthly_pressure)
+```
+
+For you to be able to use `ggplot` you will need to get the data into a single dataset and as you can tell from above that the column headers do no align (except for date).  To get this into single dataset to be used in ggplot takes a couple of steps.  
+
+```{r}
+elev.2$type<-"elev"
+monthly_pressure.2$type<-"effort"
+
+elev.2$elev_press<-elev.2$Area_ha  #  we will need to have the variable to plot (our y) in a single column
+monthly_pressure.2$elev_press<-monthly_pressure.2$mmon.all
+
+library(plyr)
+
+combined.data<-rbind.fill(elev.2,monthly_pressure.2)
+
+head(combined.data)
+tail(combined.data)
+```
+
+and lets plot the data using `ggplot`
+
+```{r}
+ ggplot(data=combined.data) +
+  geom_line(aes(x=Date, y = elev_press,group=type,colour=type),size=1) +
+  facet_wrap(~ type,ncol=1, scales="free_y") + 
+  theme_bw() + 
+  theme(legend.position="none")
+```
+
+As you might be able to tell from the above figure, there is a problem with the above figure as the y-axis label is not appropriate and probably should not be included.  The option in this case is to remove it and add it in with another program.
+
+
+```{r}
+ ggplot(data=combined.data) +
+  geom_line(aes(x=Date, y = elev_press,group=type,colour=type),size=1) +
+  facet_wrap(~ type,ncol=1, scales="free_y") + 
+  labs(y="") + 
+  theme_bw() + 
+  theme(legend.position="none")
+```
+
+Another issue with this figure is that tehre are no ticks in the upper figure of effort.  You could do do `scales = 'free'` but this would add in all the dates again along the x-axis.  The other option is to use create to seperate ggplot objects and align them with `grid.arrange` in the *gridExtra* package.  
+
+
+### grid.arrange
+```{r}
+library(gridExtra)
+
+effort.plot<- ggplot(data=monthly_pressure.2) +
+  geom_line(aes(x=Date, y = mmon.all),colour="red",size=1) +
+  labs(y = "Effort")+
+  theme_bw() + 
+  theme(axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        panel.margin = unit(0, "lines"),
+        plot.margin = unit(c(1,1,0,1), "lines"))  # set the plot margins to pull figures in closer.  order is clockwise starting with top
+
+elev.plot<- ggplot(data=elev.2) +
+  geom_line(aes(x=Date, y = Area_ha),colour="blue",size=1) +
+  labs(y = "Surface area")+
+  theme_bw() + 
+  theme(panel.margin = unit(0, "lines"),
+        plot.margin = unit(c(0.25,1,1,1), "lines"))
+
+grid.arrange(effort.plot,elev.plot)
+```
+Now as you can see in the above figure that this is much closer to what I would normally like in a figure, except that because effort and surface area have a differing number of digits, the figures do not fully align.   
+
+You can work around this using the *gtable* package.
+```{r}
+library(gtable)
+
+# Get the widths
+gA <- ggplot_gtable(ggplot_build(effort.plot))  # effort plot
+gB <- ggplot_gtable(ggplot_build(elev.plot)) # elev plot
+
+
+maxWidth = unit.pmax(gA$widths[2:3], gB$widths[2:3])  # find the maximum widths among the plots.  
+maxWidth
+
+# Set the widths with the maximum width
+gA$widths[2:3] <- maxWidth
+gB$widths[2:3] <- maxWidth
+
+# Arrange the four charts
+grid.arrange(gA, gB, ncol=1)
+```
+
+
+The above figure then no longer needs another program to add the axis labels and the top facet has tick marks.
