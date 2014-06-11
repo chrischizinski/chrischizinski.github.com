@@ -2,8 +2,8 @@
 layout: post
 title: "Plotting igraph objects with ggplot2"
 description: ""
-category: r
-tags: [R,ggplot2,igraph]
+category: rstats
+tags: [rstats,ggplot2,igraph]
 ---
 {% include JB/setup %}
 

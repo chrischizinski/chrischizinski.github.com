@@ -2,8 +2,8 @@
 layout: post
 title: "Plotting NMDS plots with ggplot2"
 description: ""
-category: r
-tags: [r,ggplot2]
+category: rstats
+tags: [rstats,ggplot2]
 ---
 {% include JB/setup %}
 ========================================================

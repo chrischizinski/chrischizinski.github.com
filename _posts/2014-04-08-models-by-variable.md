@@ -2,8 +2,8 @@
 layout: post
 title: "Models by a factor"
 description: ""
-category: R
-tags: [R]
+category: rstats
+tags: [rstats]
 ---
 {% include JB/setup %}
 

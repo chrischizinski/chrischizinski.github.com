@@ -1,8 +1,8 @@
 ---
 layout: post
 description: ""
-category: r
-tags: [R,ggplot2]
+category: rstats
+tags: [rstats,ggplot2]
 ---
 {% include JB/setup %}
 
