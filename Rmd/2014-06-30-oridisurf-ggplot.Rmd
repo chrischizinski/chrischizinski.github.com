@@ -1,0 +1,160 @@
+---
+layout: post
+title: "Ordisurf plots with ggplot2"
+description: ""
+category: rstats
+tags: [rstats,ggplot2]
+
+---
+
+A [little while back](http://chrischizinski.github.io/rstats/2014/04/13/vegan-ggplot2/) I showed how to produce NMDS plots using the **vegan** and **ggplot2** packages. In this post, I will extend the production of the NMDS plots to reproducing the smooth surface plots produced by the function ```ordisurf``` in the **vegan** package. 
+
+From the documentation,  ```ordisurf```, which requires package **mgcv**) fits smooth surfaces for continuous variables onto ordination using thinplate splines with cross-validatory selection of smoothness.
+
+I have found these type of plots particularly insightful in both understanding relationships in [bird communities to changes in vegetation structure](http://mncoopunit.cfans.umn.edu/files/2012/09/Chizinski-et-al-2011-Forest-Eology-and-Management.pdf) and to [fish communities relationship with angling effort](http://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1114&context=ncfwrustaff)
+
+Similar to reasons I mentioned when making NMDs plots in my previous posts, these plots look a whole lot better and easier to make publication ready using ggplots [themes](http://chrischizinski.github.io/rstats/2014/06/10/favorite-themes/)
+
+### ordisurf plots using base plots
+
+```{r, echo=FALSE}
+options(warn = 1,stringsAsFactors = FALSE)
+.libPaths("D:/RPackages")
+source('W:/CreelProject/RFiles/themes.r')
+```
+Load the required libraries.  For this demonstration I will use the dune dataset within the **vegan** package.  The analysis I am showing here is based on information presented in the *Vegan: an introduction to ordination*
+[vignette](http://cran.r-project.org/web/packages/vegan/vignettes/intro-vegan.pdf) by [Jari Oksanen](http://cc.oulu.fi/~jarioksa/)
+
+```{r}
+library(ggplot2)
+library(vegan)
+library(grid)
+set.seed(123456)
+
+data(dune)
+head(dune)
+```
+
+Run the ordination on the dune dataset and plot the result with base graphics
+
+```{r}
+ord <- metaMDS(dune)
+
+ord
+
+plot(ord, type = "n")
+points(ord, display = "sites", cex = 1, pch=16, col="red")
+text(ord, display = "species", cex=1, col="blue")
+```
+
+
+Now fit continuous environmental factors from the ```dune.env``` dataset using ordisurf.
+```{r}
+data(dune.env)
+head(dune.env)
+
+plot(ord, type = "n")
+points(ord, display = "sites", cex = 1, pch=16, col="red")
+text(ord, display = "species", cex=1, col="blue")
+ordisurf(ord, dune.env$A1, add=TRUE)
+```
+
+### ordisurf plots using ggplot
+
+The first step is to extract the data from the ord object and put it into a dataframe.  For the purpose of this demonstration, I am going to just focus on the species scores.
+
+Notice that I add a 'z' column filled with NAs, which allows the score data sets to be combined with the contour dataset. 
+
+```{r}
+
+species.scores<-as.data.frame(scores(ord,"species"))
+species.scores$species<-rownames(species.scores)
+names(species.scores)[c(1,2)]<-c("x","y")
+species.scores$z<-NA
+
+head(species.scores)
+
+```
+
+
+Next step is to run the ordisurf function as above.  
+
+```{r}
+dune.sf <- ordisurf(ord ~ dune.env$A1, plot = FALSE, scaling = 3)
+head(dune.sf)
+```
+
+
+We need to extract the contour information from ```dune.sf``` object.  This is in the ```$grid```.  I wrote a function that will pull out this information and put it into a dataframe with the column headers 'x', 'y', and 'z'.
+
+
+```{r}
+extract.xyz<-function(obj){
+  xy<-expand.grid(x=obj$grid$x,y=obj$grid$y)
+  xyz<-cbind(xy,c(obj$grid$z))
+  names(xyz)<-c("x","y","z")
+  return(xyz)
+}
+
+contour.vals<-extract.xyz(obj=dune.sf)
+head(contour.vals)
+```
+
+
+We now have the required information to reproduce the plot from ```ordisurf``` in **ggplot2**.  The first step is the lay down the contours in the plot. 
+
+```{r}
+
+p<-ggplot(data=contour.vals, aes(x, y, z = z))+
+  stat_contour(aes(colour = ..level..)) + 
+  coord_cartesian(xlim=c(-2,2),ylim=c(-1,1.5)) +
+  theme_mine()
+
+print(p)
+
+```
+
+
+Then add the species scores.  Note that I am using ```theme_mine``` which can be sourced from my [themes.r file](\datasets\themes.R)
+
+```{r}
+p<- p + 
+    geom_text(data=species.scores,aes(x=x,y=y,label=species),colour="red") +
+    coord_equal() +
+    theme_mine() +
+    labs(x= "NMDS1",y="NMDS2") +
+    theme(panel.border =element_rect(fill=NA),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          legend.position="none")
+
+print(p)
+
+```
+
+
+#### Adding  contour labels
+
+The trickiest part of reproducing the contours is getting the contour labels on the lines.  I usually manually create a data.frame and manually set the points that I want the labels.  
+
+```{r}
+
+labelz<-data.frame(x=c(-0.85,-0.80,-0.45,-0.15,0.15,0.50,0.85),
+           y=c(0.05,1.1,1.1,1.1,1,0.75,0.65),
+           z=NA,
+           labels=c('3.5','4.0','4.5','5.0','5.5','6.0','6.5'))
+
+p +
+  geom_text(data=labelz,aes(x=x,y=y,label=labels),angle=-80,size=6)
+
+```
+
+
+The other option is to take advantage of the **directlabels** package and utilize the function ```direct.labels()```.
+```{r}
+library(directlabels)
+direct.label(p)
+
+```
+
+As I have demonstrated that the key to using **ggplot2** to produce plots is to get the relevant data in a data.frame.  Once you get it into that format, generally, it is then easy as pie.  
