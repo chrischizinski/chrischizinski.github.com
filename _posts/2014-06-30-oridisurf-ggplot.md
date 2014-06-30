@@ -7,6 +7,9 @@ tags: [rstats,ggplot2]
 
 ---
 {% include JB/setup %}
+================================================================
+
+The RMarkdown source to this file can be found [here](\Rmd\2014-06-30-oridisurf-ggplot.Rmd)
 
 A [little while back](http://chrischizinski.github.io/rstats/2014/04/13/vegan-ggplot2/) I showed how to produce NMDS plots using the **vegan** and **ggplot2** packages. In this post, I will extend the production of the NMDS plots to reproducing the smooth surface plots produced by the function ```ordisurf``` in the **vegan** package. 
 
