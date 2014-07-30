@@ -1,0 +1,204 @@
+Simulating angler survey data 
+========================================================
+```{r, echo=FALSE}
+options(warn = 1,stringsAsFactors = FALSE)
+.libPaths("D:/RPackages")
+source('W:/CreelProject/RFiles/themes.r')
+```
+
+
+In doing some reading recently, I came across the  [Programs to Simulate Catch Rate Estimation in a Roving Creel Survey of Anglers](http://www.dfo-mpo.gc.ca/CSAS/Csas/DocREC/1995/1995_099_e.pdf) authored by Colin J . Greene, John M . Hoenig, Nicholas J . Barrowman, and [Kenneth J. Pollock](http://www4.ncsu.edu/~pollock/research.html).  
+
+There is some code in this report to simulate an angler population and generate catches.  The code is written in Splus and I thought I would mess around with it in R.  All credit for the code goes to these authors.  I made a few changes here and there to the code, primarily staying away from lists where it was not essentially needed.  
+
+### makeanglers()
+
+```{r}
+makeanglers<-function(nanglers=50){
+  # This function generates a simulated angler population with a set location, starting time
+  #, and trip length.  
+  anglers<-data.frame(angl.id=1:nanglers)
+  start.pos<- 0.004
+  spacing<- (1-start.pos)/nanglers
+  
+  anglers$loc<-seq(from=start.pos, by=spacing, length=nanglers) 
+
+  #Give all the anglers a start time representing 1.0 hour into the fishing day
+  anglers$starttime <- rep(1, nanglers)
+
+  # Assign each angler a triplength, where the duration of the trip will alternate between 
+  # 3 and 6 hours as the anglers alternate .
+  anglers$triplength <- c(rep(c(3,6), nanglers/2) )
+
+  # NOTE : nanglers/2 = 25 . If the value of nanglers is an odd number, the
+  # number of repetions given by rep() would be one number short . For our
+  # purposes only even numbers were used .
+
+  return(anglers)
+  }
+```
+Run the function with the 50 anglers to generate the data
+```{r}
+anglers<-makeanglers(nanglers=50)
+anglers
+
+```
+We can calculate the total effort by the 50 anglers.
+```{r}
+trueeffort=sum(anglers$triplength)
+trueeffort
+```
+We can visualize where the anglers are using ggplot2 and drawing on some geometry from days past.
+
+```{r}
+library(ggplot2)
+library(grid)
+# source('W:/CreelProject/RFiles/themes.r') source for theme_map
+radius<-1/(2*pi)  # calculate the radius from a circumfrence of 1 (given in the makeanglers() code)
+
+#Create a function to generate the points on a circle
+#  Found at http://stackoverflow.com/questions/6862742/draw-a-circle-with-ggplot2
+
+circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
+    r = diameter / 2
+    tt <- seq(0,2*pi,length.out = npoints)
+    xx <- center[1] + r * cos(tt)
+    yy <- center[2] + r * sin(tt)
+    return(data.frame(x = xx, y = yy))
+}
+
+nanglers<-50  # Use same number of anglers as above
+dat <- circleFun(c(0,0),diameter =radius*2,npoints = 100)  # run the code to generate circle
+points2<-data.frame(angl.id=1:nanglers,dist=NA,x=NA,y=NA)
+points2$dist[1]<-0.004  # first angler distance from makeanglers() code
+points2$dist[2:length(points2$dist)]<-0.004+0.02*(points2$angl.id[2:length(points2$dist)]-1) # add another angler an equidistant point from the initial anglers
+points2$angle<-(360*(points2$dist/(2*pi*radius)))*(pi/180)  #  convert that distance along the circumfrence to an angle in radians
+
+#calculate cartesian coordinate using the standard equations
+points2$x<-radius*sin(points2$angle) + 0  
+points2$y<-radius*cos(points2$angle) + 0
+
+
+
+lake.map<-ggplot() + 
+          geom_polygon(data=dat,aes(x,y),fill="lightblue") +
+          geom_point(data=points2,aes(x,y),size=4,colour="red") +
+          coord_equal() + 
+          theme_map()
+
+print(lake.map)
+```
+
+### gettotalvalues()
+Simulate a creel survey and compute estimates of total catch.
+The basic process of this code is to simulate each anglers fishing day by determining simulating if and when fish are caught during the duration of each fishing trip.  Using ```length()``` on the times that fish were caught will give you the number caught.  
+
+The next step is to simulate a starting position of a creel clerk (or as in the below code, a survey agent) and the speed that the creel clerk will make it around the lake.  If the time that a clerk gets to a position is during the duration of the anglers fishing trip then the effort and catch is recorded at the time of the interview.  If the trip duration does not fall within the encounter time, then no interview is recorded.  
+
+```{r}
+makeinterview <- function(ang= anglers,teffort=trueeffort, nanglers=length(anglers$loc)){
+  # Generate a catch history for each angler .
+  # Start by obtaining a random catch rate parameter for each angler 
+  # following a Poisson process
+
+  lambda <- rgamma(nanglers,1)*2
+  catch <- vector("list",nanglers )
+  for(i in 1:nanglers){ # Do this for each angler .
+    # Time of day when the angler arrives .
+      time <- ang$starttime[i]
+    # If the time calculated below falls within the trip duration, this time
+    # will be recorded as the instant when the first fish was caught .
+    time <- time + rexp(1, rate=lambda[i])
+    # At the beginning of each loop through the while statement, check to see if
+    # the current fish capture time falls within the duration of the trip .
+      while(time <= ang$starttime[i] + ang$triplength[i]) {
+       ### NOTE : the number of fish caught is given by length(catch[[i]]) .
+      catch[[i]] <- c(catch[[i]],time )
+      # Calculate the time when the next fish is to be caught .
+      time <- time + rexp(1, rate=lambda[i] )
+      } # end of while loop
+    }# end of i for loop
+
+  #################################################
+  # Obtain a starting postion for the survey agent .
+  #################################################
+  
+  startloc <- runif(1) # Start postion of surveyor
+  agentspeed <- .125   # Speed of the surveyor in circuits per hour (i.e., 1/8)
+  
+  # This time switch is nesseccary for the simulation of the circular lake, 
+  #with a perimeter of 1.0, where the positions 0.0 and 1.0 are equivalent 
+  #on the lake representation . At this point a"jump" must be made, 
+  #which is accomplished by our timeswitch .
+  timeswitch <- (1-startloc)/agentspeed
+  
+                      
+  inteffort <- intcatch <- cr <- vector("numeric",length=length(catch))
+  # For each sample of anglers
+  for(i in 1 :nanglers) {
+    # Calculate the time of each interview
+    if( (startloc < ang$loc [i] ) & (ang$loc[i] < 1) ) {
+      timeint <- (ang$loc[i] - startloc) * 8 
+      }
+    else if((0 < ang$loc[i] ) & (ang$loc[i] < startloc) ) {
+      timeint <- ang$loc[i] * 8 + timeswitch
+      }
+    
+      # Calculate the fishing effort at the time of each interview
+      inteffort[i] <- 0
+    if( (ang$starttime[i] < timeint) & (timeint < ang$starttime[i] + ang$triplength[i]) ){
+        inteffort[i] <- timeint - ang$starttime[i ]
+    }  # else if no interview took place leave inteffort at default 0
+    
+    
+    # Determine the number caught by the time of the interview
+    intcatch[i] <- 0
+    if( length(catch[[i]]) > 0 ){
+      for(k in 1 :length(catch[[i]])){
+        
+        if((catch[[i]] [k] < timeint) & (timeint < ang$starttime[i]+ang$triplength[i])){
+          intcatch[i] <- intcatch[i] + 1
+        }
+      }
+    } # else if no fish were caught leave intcatch at default 0
+  # Calculate catch rate
+    if( inteffort[i] > 0) cr[i] <- intcatch [i] / inteffort[i]
+    else cr[i] <- NA
+  }# end of i for loop
+  
+  interview.dat<-data.frame(angl.id=ang$angl.id, intcatch=intcatch, inteffort=inteffort, catchrate=cr)
+  dat<-list(Actual.catches=catch,interview.data=interview.dat)
+  return(dat)
+}
+
+```
+
+```{r}
+angler.data<-makeinterview(ang=anglers, teffort=trueeffort, nanglers=length(anglers$loc))
+angler.data$interview.dat
+```
+
+In the above angler data, anglers with inteffort = 0 were not interviewed.  We can represent this in ggplot showing all the anglers and anglers not surveyed during that day. Note, that I did not set a seed so your figures may look a little different than this one based on the randomized nature of the catches and starting position.  
+
+```{r}
+points3<-merge(points2,angler.data$interview.dat,by="angl.id",all=TRUE)
+points3$interviewed<-as.factor(ifelse(points3$inteffort>0,1,0))
+
+interview.map<-ggplot() + 
+          geom_polygon(data=dat,aes(x,y),fill="lightblue") +
+          geom_point(data=points3,aes(x,y,colour=interviewed),size=4) +
+          coord_equal() + 
+          theme_map()
+
+print(interview.map)
+
+catchrate.map<-ggplot() + 
+          geom_polygon(data=dat,aes(x,y),fill="lightblue") +
+          geom_point(data=points3,aes(x,y,size=catchrate),colour="red") +
+          coord_equal() + 
+          theme_map()
+
+print(catchrate.map)
+```
+
+I hope to come back and revist these code frequently in future blog posts.  The authors of the report provide several different scenarios which include an effort dependent models, a learner model, and a bag limit model but there are so many more modifications that we can add.  
