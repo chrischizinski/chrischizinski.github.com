@@ -3,7 +3,7 @@ layout: post
 title: "Simulating angler survey data"
 description: ""
 category: rstats
-tags: [rstats,ggplot2]
+tags: [rstats,anglers]
 ---
 {% include JB/setup %}
 ======================================================== 
