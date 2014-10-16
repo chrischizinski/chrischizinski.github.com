@@ -5,6 +5,8 @@ header:
 --- 
 
 
+22. Chizinski, C. J., D. R. Martin, C. G. Huber, and K. L. Pope. 2014.  The influence of a rapid drawdown and prolonged dewatering on angling pressure, catch and harvest in a Nebraska reservoir.  Great Plains Research, 24:145-152.
+
 21.	Martin, D. R., C. J. Chizinski, K. M. Eskridge, and K. L. Pope. 2014. Using posts to an online social network to assess fishing effort.  Fisheries Research, 157:24–27.
 
 20.	Chizinski, C. J., D. R. Martin, K. Hurley, and K. L. Pope. 2014. Anglers’ self-imposed length limits.  Fisheries Research, 155:83–89.
