@@ -90,7 +90,7 @@ If you are using any of the options above with RStudio, make sure that you have 
 
 
 Or and perhaps easiest of all (particularly if you are not using RStudio) you can follow this link:
-[chrischizinski.shinyapps.io/scheduleR](chrischizinski.shinyapps.io/scheduleR)
+[chrischizinski.shinyapps.io/scheduleR](https://chrischizinski.shinyapps.io/scheduleR/)
 
 ### References
 Malvestuto, S.P., 1996. Sampling the recreational fishery. In: Murphy, B.R., Willis,
