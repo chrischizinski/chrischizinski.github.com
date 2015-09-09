@@ -10,7 +10,10 @@ tags: [gradstudents]
 Since my last post, I have accepted a new position at the University of Nebraska --Lincoln as an Assistant Professor Of Human Dimensions of Wildlife Management.  As such,
 I am currently looking for two students (1 Ph.D. and 1 M.S.) to fill research assistantships starting January 2016 at the University of Nebraska -- Lincoln.
 
-If you are interested in applying I suggest you read [here](/b_prospective.html) and I strongly encourage you to read the [Fontaine Lab Manifesto](https://sites.google.com/site/tjfontaineunl/Lab%20Manifesto%20May%202013.pdf?attredirects=0)
+If you are interested in applying, I suggest you read [here](/b_prospective.html) and I strongly encourage you to read the [Fontaine Lab Manifesto.](https://sites.google.com/site/tjfontaineunl/Lab%20Manifesto%20May%202013.pdf?attredirects=0)  While it was written
+by TJ for his lab I believe very similarly to him.
+
+
 
 ## M.S. Assistantship:  Influence of regulations on harvest decisions
 
