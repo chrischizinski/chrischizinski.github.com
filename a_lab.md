@@ -12,4 +12,4 @@ tagline:
 ![alt text](/figs/chiz1.jpg "Chris Chizinski")     [Christopher J. Chizinski](/chrischizinski.html) 
 
 ##Graduate Students
-[Alexis D. Fedele](/alexisfedele.html)
+![alt text](/figs/fedele1.jpg "Alexis Fedele")     [Alexis D. Fedele](/alexisfedele.html)
