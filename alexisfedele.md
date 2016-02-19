@@ -5,7 +5,10 @@ header:
 --- 
 {% include JB/setup %}
 
+
 ![center](/figs/afedele.jpg)
+
+
 
 ###MS Student – Applied Ecology 
 
