@@ -1,10 +1,7 @@
 ---
 layout: page
 title: Lab folks
-header: 
 group: navigation
-
-tagline: 
 ---
 {% include JB/setup %}
 
