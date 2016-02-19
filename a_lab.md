@@ -11,7 +11,9 @@ tagline:
 
 ##Primary Researcher
 
-![alt text](/figs/chiz1.jpg "Chris Chizinski")     [Christopher J. Chizinski](/chrischizinski.html) 
+<img style="float:left" src="/figs/chiz1.jpg" />
+
+[Christopher J. Chizinski](/chrischizinski.html) 
 
 
 ##Research Program Coordinator
