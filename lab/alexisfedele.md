@@ -3,7 +3,7 @@ layout: default
 title: Alexis Fedele
 --- 
 
-![center](/lab/afedele.JPG)
+![center](/lab/afedele.jpg)
 
 
 
