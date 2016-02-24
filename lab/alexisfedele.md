@@ -4,7 +4,6 @@ title: Alexis Fedele
 header: 
 --- 
 
-{% include JB/setup %}
 
 ![center](/lab/afedele.jpg)
 
