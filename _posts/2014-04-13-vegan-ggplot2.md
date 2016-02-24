@@ -6,6 +6,7 @@ category: rstats
 tags: [rstats,ggplot2]
 ---
 {% include JB/setup %}
+
 ========================================================
 
 The RMarkdown source to this file can be found [here](\Rmd\2014-04-13-vegan-ggplot2.Rmd)

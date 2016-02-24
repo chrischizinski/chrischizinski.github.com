@@ -5,9 +5,8 @@ description: ""
 category: rstats
 tags: [rstats,ggplot2,igraph]
 ---
-{% include JB/setup %}
 
-========================================================
+{% include JB/setup %}
 
 I have been working collaborating on a project with [Dustin Martin](https://sites.google.com/site/martinfisheries/) using network theory.  
 We have are utilizing the *igraph* package in R, which ultimately produces graphs of networks.  
@@ -20,13 +19,13 @@ plus I have themes created for *ggplot*.  So I explored a way to create the *igr
 First, I will bring in the data, which is a matrix of species relative abundances.  Columns are the species and each row is an observation. Here is a snapshot of what the data looks like
 
 
-{% highlight r %}
+{% highlight r  %}
 head(caught.wide.2)
 {% endhighlight %}
 
 
 
-{% highlight text %}
+{% highlight text  %}
 ##                    BLG    CCF COC CRP FHC FWD     HSB LMB NOP WAE WHB
 ## 6915.2009-04-07.8    0 0.2222   0   0   0   0 0.00000   0   0 0.0   0
 ## 6915.2009-04-11.14   0 0.0000   0   0   0   0 0.00000   0   0 0.4   0

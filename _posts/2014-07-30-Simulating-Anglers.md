@@ -5,8 +5,8 @@ description: ""
 category: rstats
 tags: [rstats,anglers]
 ---
-{% include JB/setup %}
-======================================================== 
+
+{% include JB/setup %} 
 
 The RMarkdown source to this file can be found [here](\Rmd\2014-07-30-Simulating-Anglers.Rmd)
 

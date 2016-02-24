@@ -3,10 +3,10 @@ layout: post
 title: "A Shiny Creel Scheduler"
 description: ""
 category: rstats
-tags: [rstats,creel]
+
 ---
 {% include JB/setup %}
-======================================================== 
+
 
 A shiny app to generate creel schedules
 ========================================================
