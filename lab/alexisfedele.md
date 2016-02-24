@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Alexis Fedele
 header: 
 --- 
@@ -7,9 +7,9 @@ header:
 
 ![center](/lab/afedele.jpg)
 
-#Alexis Fedele
+#
 
-##MS Student – Applied Ecology 
+## Alexis Fedele - MS Student – Applied Ecology 
 
 ##Background:
 I grew up in Northern California, and from an early age, had a broad interest in wildlife and the outdoors. These interests narrowed after my first undergraduate technician position assisting with a study of endangered giant kangaroo rats, when I became intrigued by community interactions in an ecosystem and animal behavior. I chose to work with two non-profits promoting aquatic ecosystem restoration for two years to gain experience before deciding to pursue a Master’s degree at UNL. 

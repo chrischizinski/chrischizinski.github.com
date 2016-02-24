@@ -1,12 +1,10 @@
 ---
 layout: default
 title: Christopher Chizinski
-header: 
 --- 
 
-{% include JB/setup %}
-
 ![center](/lab/me.JPG)
+
 
 #Christopher Chizinski
 

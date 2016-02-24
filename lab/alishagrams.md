@@ -1,10 +1,9 @@
 ---
-layout: page
+layout: default
 title: Alisha Grams
 header: 
 --- 
 
-{% include JB/setup %}
 
 ![center](/lab/agrams.jpg)
 
