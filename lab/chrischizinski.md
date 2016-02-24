@@ -6,9 +6,9 @@ title: Christopher Chizinski
 ![center](/lab/me.JPG)
 
 
-#Christopher Chizinski
+#
 
-## Assistant Professor
+## Christopher Chizinski - Assistant Professor
 
 I am an Assistant Professor of Human Dimensions of Wildlife Management at the [University of Nebraska](http://snr.unl.edu), where I 
 conduct research on dynamic relationships between sportspersons and wildlife. 

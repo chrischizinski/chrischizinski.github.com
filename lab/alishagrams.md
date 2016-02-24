@@ -1,15 +1,14 @@
 ---
 layout: default
 title: Alisha Grams
-header: 
 --- 
 
 
 ![center](/lab/agrams.jpg)
 
-#Alisha Grams
+#
 
-##MS Student – Applied Ecology 
+##Alisha Grams - MS Student – Applied Ecology 
 
 ##Background:
 I grew up in Southern Minnesota with a passion for being outdoors, specifically fishing and hiking. I pursued my interests in nature by exploring a diverse range of college courses and taking on an undergraduate research project that focused on the behavior of crayfish under different environmental conditions. I spent two summer seasons as an interpreter for two state parks, 
