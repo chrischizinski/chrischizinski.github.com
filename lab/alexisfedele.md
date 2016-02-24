@@ -26,18 +26,18 @@ to angling. Using laboratory experiments, I am exploring whether fish are able t
 alter their behavior after repeated fishing events and whether their ability to learn is 
 affected by their individual level of boldness.
 
-##Education: 
+## Education: 
 
 * B.S. Molecular Environmental Biology with an emphasis in Animal Behavior, UC Berkeley (2012) 
   
-##Professional Appointments: 
+## Professional Appointments: 
 
 * Community Engagement Specialist, Save The Bay (Oakland), 2013-2014
 * Interpretive Naturalist, Aquarium of the Bay (San Francisco), 2012
 * Conservation Fieldwork Assistant, University of California, Berkeley, 2010-2011
 * Undergraduate Research Apprentice, University of California, Berkeley, 2009-2010
 
-##Contact: 
+## Contact: 
 
 [Link](http://snr.unl.edu/aboutus/who/people/graduatestudent-member.asp?pid=2046)
 
