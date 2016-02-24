@@ -6,7 +6,7 @@ title: Alexis Fedele
 
 ![center](/lab/afedele.jpg)
 
-#
+
 
 ##Alexis Fedele - MS Student – Applied Ecology 
 

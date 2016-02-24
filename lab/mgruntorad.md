@@ -3,13 +3,12 @@ layout: default
 title: Matthew Gruntorad
 --- 
 
-{% include JB/setup %}
 
 ![center](/lab/mgruntorad.jpg)
 
-#Matthew Gruntorad
 
-##Research Program Coordinator
+
+##Matthew Gruntorad - Research Program Coordinator
 
 ##Background:
 I grew up on a small farm here in Nebraska, where  I enjoyed all of the outdoor recreation opportunities that rural living has to offer. As an undergraduate, I assisted in research involving capture rates of catfish in Nebraska’s lakes and river systems. As a master’s student at Texas Tech University, I investigated the potential for using sound produced by gizzard shad as a means to evaluate water conditions. After completing my master’s work, I returned to Nebraska to work for the Nebraska Game and Parks Commission, where I operated the Family Fishing Program and participated in Aquatic Education.
