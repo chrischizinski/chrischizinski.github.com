@@ -9,7 +9,7 @@ title: Alexis Fedele
 
 ## Alexis Fedele - MS Student – Applied Ecology
 
-## Background
+## Background:
 
 I grew up in Northern California, and from an early age, had a broad interest in wildlife 
 and the outdoors. These interests narrowed after my first undergraduate technician position 
@@ -18,7 +18,7 @@ interactions in an ecosystem and animal behavior. I chose to work with two non-p
 promoting aquatic ecosystem restoration for two years to gain experience before deciding 
 to pursue a Master’s degree at UNL.
 
-### Research interests
+### Research interests:
 
 I am interested in human dimensions of wildlife, behavioral reaction norms, and phenotypic 
 plasticity in animal behavior. Specifically, I am focusing on fishes’ behavioral response 
