@@ -6,7 +6,6 @@ title: Christopher Chizinski
 ![center](/lab/me.JPG)
 
 
-#
 
 ## Christopher Chizinski - Assistant Professor
 
