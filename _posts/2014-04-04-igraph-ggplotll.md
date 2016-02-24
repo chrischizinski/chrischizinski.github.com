@@ -6,7 +6,7 @@ category: rstats
 tags: [rstats,ggplot2,igraph]
 ---
 
-{% include JB/setup %}
+
 
 I have been working collaborating on a project with [Dustin Martin](https://sites.google.com/site/martinfisheries/) using network theory.  
 We have are utilizing the *igraph* package in R, which ultimately produces graphs of networks.  

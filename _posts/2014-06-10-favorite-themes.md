@@ -4,7 +4,7 @@ description: ""
 category: rstats
 tags: [rstats,ggplot2]
 ---
-{% include JB/setup %}
+
 
 A few of my favorite themes
 ========================================================

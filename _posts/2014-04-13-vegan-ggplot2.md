@@ -5,7 +5,6 @@ description: ""
 category: rstats
 tags: [rstats,ggplot2]
 ---
-{% include JB/setup %}
 
 ========================================================
 

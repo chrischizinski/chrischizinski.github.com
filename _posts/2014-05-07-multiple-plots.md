@@ -4,7 +4,7 @@ description: ""
 category: rstats
 tags: [rstats,ggplot2,igraph]
 ---
-{% include JB/setup %}
+
 
 
 Multiple plots in ggplot2

@@ -6,7 +6,7 @@ category: rstats
 tags: [rstats,ggplot2]
 ---
 
-{% include JB/setup %}
+
 
 The RMarkdown source to this file can be found [here](\Rmd\2014-08-24-using_geom_blank.Rmd)
 

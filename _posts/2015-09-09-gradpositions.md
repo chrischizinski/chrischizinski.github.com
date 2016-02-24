@@ -6,7 +6,7 @@ category: labnotes
 
 ---
 
-{% include JB/setup %}
+
 
 Since my last post, I have accepted a new position at the University of Nebraska --Lincoln as an Assistant Professor Of Human Dimensions of Wildlife Management.  As such,
 I am currently looking for two students (1 Ph.D. and 1 M.S.) to fill research assistantships starting January 2016 at the University of Nebraska -- Lincoln.

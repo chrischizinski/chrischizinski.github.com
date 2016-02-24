@@ -6,7 +6,6 @@ category: rstats
 tags: [rstats]
 ---
 
-{% include JB/setup %}
 
 Recently, a friend asked a question on ways to run a single model by a grouping variable in a dataset (similar to the BY statement in SAS for those familiar with SAS).  This was a list of the multiple different ways
 that were suggested.  

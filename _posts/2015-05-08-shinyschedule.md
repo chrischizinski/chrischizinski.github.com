@@ -5,7 +5,7 @@ description: ""
 category: rstats
 
 ---
-{% include JB/setup %}
+
 
 
 A shiny app to generate creel schedules
