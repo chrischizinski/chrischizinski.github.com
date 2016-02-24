@@ -3,7 +3,7 @@ layout: default
 title: Alisha Grams
 --- 
 
-![center](/lab/agrams.jpg)
+![center](/lab/afedele.jpg)
 
 
 
