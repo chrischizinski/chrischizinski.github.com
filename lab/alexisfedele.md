@@ -6,7 +6,7 @@ header:
 
 {% include JB/setup %}
 
-![center](/figs/afedele.jpg)
+![center](/lab/afedele.jpg)
 
 #Alexis Fedele
 

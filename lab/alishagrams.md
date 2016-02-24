@@ -6,7 +6,7 @@ header:
 
 {% include JB/setup %}
 
-![center](/figs/agrams.jpg)
+![center](/lab/agrams.jpg)
 
 #Alisha Grams
 

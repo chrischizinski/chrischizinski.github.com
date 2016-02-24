@@ -5,7 +5,7 @@ title: Matthew Gruntorad
 
 {% include JB/setup %}
 
-![center](/figs/mgruntorad.jpg)
+![center](/lab/mgruntorad.jpg)
 
 #Matthew Gruntorad
 

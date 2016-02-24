@@ -6,7 +6,7 @@ header:
 
 {% include JB/setup %}
 
-![center](/figs/me.JPG)
+![center](/lab/me.JPG)
 
 #Christopher Chizinski
 
