@@ -12,6 +12,7 @@ nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;
 }
+
 a {
     text-decoration: none;
     color: #D00000;
@@ -30,7 +31,7 @@ p {
 }
 footer {
     border-top: 1px solid #d5d5d5;
-    font-size: .8em;
+    font-size: 1em;
 }
 
 ul.posts { 
@@ -40,6 +41,8 @@ ul.posts {
 
 ul.posts li {
     list-style-position: unset;
-  list-style-type: circle;
+  	list-style-type: circle;
+  	font-family:'Courier New';
+  	font-size: 0.85em;
 }
 
