@@ -17,22 +17,22 @@ by TJ.
 
 ## M.S. Assistantship:  Influence of regulations on harvest decisions
 
-###Salary
+### Salary
 $ 18,000 per year, with tuition waiver (student is responsible for fees) and health insurance
 
-###Start Date
+### Start Date
 January 2016
 
-###Last Date to Apply
+### Last Date to Apply
 November 1, 2105
 
-###Description
+### Description
 The primary objective of this position is to explore the influence of regulations and perceptions on harvest decisions by hunters.  
 The successful candidate will be expected to develop a research project within this guideline on topics identified as priorities by 
 natural resource managers within the state of Nebraska. This project will involve considerable effort, especially on weekends and holidays, 
 interviewing sportspersons throughout Nebraska.
 
-###Qualifications  
+### Qualifications  
 BS in human dimensions, wildlife and fisheries, ecology, or closely related fields. 
 The successful applicant will be highly motivated and possess strong work ethics, excellent communication 
 skills, and passion for collaborative research. Applicant must be comfortable interacting with members of the 
@@ -49,22 +49,22 @@ equal opportunity, work-life balance, and dual careers.  See [http://www.unl.edu
 
 ## Ph.D. Assistantship:  Participation patterns of waterfowl hunters
 
-###Salary
+### Salary
 $ 20,000 per year, with tuition waiver (student is responsible for fees) and health insurance
 
-###Start Date
+### Start Date
 January 2016
 
-###Last Date to Apply
+### Last Date to Apply
 November 1, 2105
 
-###Description
+### Description
 We are seeking qualified applicants for a Ph.D. research position in the [School of 
 Natural Resources at the University of Nebraska](http://FishHunt.unl.edu) starting in January 2016 .  
 The primary objective of this position is to explore opinions, preferences and potential barriers among waterfowl hunters.  
 The student is expected to work collaboratively with management agencies and develop a dissertation topic around the primary objective. 
 
-###Qualifications  
+### Qualifications  
 MS in human dimensions, wildlife and fisheries, ecology, or closely related fields. 
 The successful applicant will be highly motivated and possess strong work ethics, excellent communication 
 skills, and passion for collaborative research. Applicant must be comfortable interacting with members of the 
@@ -77,4 +77,4 @@ file should contain the first and last name of the applicant. This file should b
 Formal application to UNL, including official transcripts and GRE, is required subsequent to selection of the successful candidate.  
 
 The University of Nebraska is committed to a pluralistic campus community through affirmative action, 
-equal opportunity, work-life balance, and dual careers.  See [http://www.unl.edu/equity/notice-nondiscrimination](http://www.unl.edu/equity/notice-nondiscrimination)
+equal opportunity, work-life balance, and dual careers.  See [http://www.unl.edu/equity/notice-nondiscrimination](http://www.unl.edu/equity/notice-nondiscrimination)x
