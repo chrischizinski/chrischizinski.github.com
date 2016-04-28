@@ -30,8 +30,8 @@ p {
     color: #333;
 }
 footer {
-    border-top: 1px solid #d5d5d5;
     font-size: 1em;
+    width:99%;
 }
 
 ul.posts { 
@@ -44,5 +44,11 @@ ul.posts li {
   	list-style-type: circle;
   	font-family:'Courier New';
   	font-size: 0.85em;
+}
+
+section {
+    width:48%;
+    float:left;
+    padding:10px;        
 }
 
